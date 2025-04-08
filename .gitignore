@@ -1,4 +1,4 @@
-/app/__pycache__/*
-
 app.db
 venv
+
+__pycache__
