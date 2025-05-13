@@ -1,0 +1,125 @@
+2025-05-13 15:30:48,769 ERROR: Exception on /user/test3 [GET] [in /home/matt/.local/lib/python3.8/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/matt/.local/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/matt/projects/flask-microblog/app/routes.py", line 79, in user
+    return render_template('user.html', user=user, posts=posts)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/matt/projects/flask-microblog/app/templates/base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 17, in block 'content'
+    {{ form.hidden_tag() }}
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-05-13 15:30:54,538 ERROR: Exception on /user/susan [GET] [in /home/matt/.local/lib/python3.8/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/matt/.local/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/matt/projects/flask-microblog/app/routes.py", line 79, in user
+    return render_template('user.html', user=user, posts=posts)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/matt/projects/flask-microblog/app/templates/base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 17, in block 'content'
+    {{ form.hidden_tag() }}
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-05-13 15:30:56,908 ERROR: Exception on /user/susan [GET] [in /home/matt/.local/lib/python3.8/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/matt/.local/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/matt/projects/flask-microblog/app/routes.py", line 79, in user
+    return render_template('user.html', user=user, posts=posts)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/matt/projects/flask-microblog/app/templates/base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 17, in block 'content'
+    {{ form.hidden_tag() }}
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-05-13 15:31:08,349 ERROR: Exception on /user/test3 [GET] [in /home/matt/.local/lib/python3.8/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/matt/.local/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/matt/projects/flask-microblog/app/routes.py", line 79, in user
+    return render_template('user.html', user=user, posts=posts)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/home/matt/.local/lib/python3.8/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/matt/projects/flask-microblog/app/templates/base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/matt/projects/flask-microblog/app/templates/user.html", line 17, in block 'content'
+    {{ form.hidden_tag() }}
+  File "/home/matt/.local/lib/python3.8/site-packages/jinja2/environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-05-13 15:33:34,338 INFO: Microblog startup [in /home/matt/projects/flask-microblog/app/__init__.py:29]
