@@ -2,5 +2,6 @@ app.db
 venv
 /logs/
 *.log
+.env
 
 __pycache__
