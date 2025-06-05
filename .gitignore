@@ -3,5 +3,6 @@ venv
 /logs/
 *.log
 .env
+.flaskenv
 
 __pycache__
