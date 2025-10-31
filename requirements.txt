@@ -90,6 +90,8 @@ packaging==25.0
     # via
     #   flask-moment
     #   gunicorn
+psycopg2-binary==2.9.10
+    # via -r requirements.in
 pyjwt==2.9.0
     # via -r requirements.in
 python-dateutil==2.9.0.post0
