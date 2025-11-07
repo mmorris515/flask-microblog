@@ -54,7 +54,7 @@ def create_app(config_class=Config):
     from app.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
 
-    # One-time reindex on startup (REMOVE AFTER FIRST SUCCESSFUL DEPLOY)
+    """ One-time reindex on startup (REMOVE AFTER FIRST SUCCESSFUL DEPLOY)
     if not app.debug and not app.testing and app.elasticsearch:
         with app.app_context():
             try:
@@ -67,6 +67,8 @@ def create_app(config_class=Config):
                 app.logger.info(f'Reindexed {len(posts)} posts')
             except Exception as e:
                 app.logger.error(f'Reindex failed: {e}')
+
+    """
 
     if not app.debug and not app.testing:
         """
