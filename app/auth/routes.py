@@ -62,7 +62,9 @@ def reset_password_request():
     if form.validate_on_submit():
         user = db.session.scalar(
             sa.select(User).where(User.email == form.email.data))
+        current_app.logger.info(f"User lookup result: {user}")
         if user:
+            current_app.logger.info(f"Calling send_password_reset_email for {user.email}")
             send_password_reset_email(user)
             current_app.logger.info(f"Triggered password reset for {user.email}")         
         flash(
