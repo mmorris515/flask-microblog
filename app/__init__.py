@@ -8,7 +8,7 @@ from flask_login import LoginManager
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
 from config import Config
-from elasticsearch import Elasticsearch
+from opensearchpy import OpenSearch
 
 
 def get_locale():
@@ -33,8 +33,17 @@ def create_app(config_class=Config):
     login.init_app(app)
     moment.init_app(app)
     babel.init_app(app, locale_selector=get_locale)
-    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
-        if app.config['ELASTICSEARCH_URL'] else None
+
+    # Initialize OpenSearch client
+    if app.config['ELASTICSEARCH_URL']:
+        app.elasticsearch = OpenSearch(
+            [app.config['ELASTICSEARCH_URL']],
+            use_ssl=True,
+            verify_certs=True,
+            ssl_show_warn=False
+        )
+    else:
+        app.elasticsearch = None
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
