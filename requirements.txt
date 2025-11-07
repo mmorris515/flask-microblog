@@ -14,7 +14,7 @@ blinker==1.8.2
     #   flask-mail
 certifi==2025.10.5
     # via
-    #   elasticsearch
+    #   elastic-transport
     #   requests
     #   sib-api-v3-sdk
 charset-normalizer==3.4.4
@@ -23,7 +23,9 @@ click==8.1.8
     # via flask
 dnspython==2.6.1
     # via email-validator
-elasticsearch==7.10.0
+elastic-transport==8.17.1
+    # via elasticsearch
+elasticsearch==9.0.4
     # via -r requirements.in
 email-validator==2.3.0
     # via -r requirements.in
@@ -94,7 +96,9 @@ psycopg2-binary==2.9.10
 pyjwt==2.9.0
     # via -r requirements.in
 python-dateutil==2.9.0.post0
-    # via sib-api-v3-sdk
+    # via
+    #   elasticsearch
+    #   sib-api-v3-sdk
 python-dotenv==1.0.1
     # via -r requirements.in
 pytz==2025.2
@@ -117,10 +121,11 @@ sqlalchemy==2.0.44
 typing-extensions==4.13.2
     # via
     #   alembic
+    #   elasticsearch
     #   sqlalchemy
 urllib3==1.26.20
     # via
-    #   elasticsearch
+    #   elastic-transport
     #   requests
     #   sib-api-v3-sdk
 werkzeug==3.0.6
