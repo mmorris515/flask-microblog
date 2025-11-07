@@ -5,16 +5,17 @@ from flask import current_app
 import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 
-# Configure Brevo API client
-configuration = sib_api_v3_sdk.Configuration()
-configuration.api_key['api-key'] = app.config['BREVO_API_KEY']
-api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
-
 
 def send_async_email(app, subject, sender, recipients, html_body):
     with app.app_context():
         try:
             app.logger.info(f"send_async_email started for {recipients}")
+
+            # Configure Brevo API client
+            configuration = sib_api_v3_sdk.Configuration()
+            configuration.api_key['api-key'] = app.config['BREVO_API_KEY']
+            api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
+
             send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
                 to=[{"email": email} for email in recipients],
                 sender={"email": sender},
