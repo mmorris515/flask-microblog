@@ -18,3 +18,4 @@ class Config:
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     POSTS_PER_PAGE = 25
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    BREVO_API_KEY = os.environ.get('BREVO_API_KEY')

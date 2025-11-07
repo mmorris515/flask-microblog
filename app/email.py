@@ -7,7 +7,7 @@ from sib_api_v3_sdk.rest import ApiException
 
 # Configure Brevo API client
 configuration = sib_api_v3_sdk.Configuration()
-configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
+configuration.api_key['api-key'] = app.config['BREVO_API_KEY']
 api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 
 
