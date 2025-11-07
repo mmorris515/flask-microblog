@@ -4,12 +4,10 @@ import click
 
 bp = Blueprint('cli', __name__, cli_group=None)
 
-
 @bp.cli.group()
 def translate():
     """Translation and localization commands."""
     pass
-
 
 @translate.command()
 @click.argument('lang')
@@ -22,7 +20,6 @@ def init(lang):
         raise RuntimeError('init command failed')
     os.remove('messages.pot')
 
-
 @translate.command()
 def update():
     """Update all languages."""
@@ -32,9 +29,24 @@ def update():
         raise RuntimeError('update command failed')
     os.remove('messages.pot')
 
-
 @translate.command()
 def compile():
     """Compile all languages."""
     if os.system('pybabel compile -d app/translations'):
         raise RuntimeError('compile command failed')
+
+@bp.cli.command()
+def reindex():
+    """Reindex all posts in OpenSearch."""
+    from app import db
+    from app.models import Post
+    from app.search import add_to_index
+    
+    click.echo('Reindexing posts...')
+    
+    posts = Post.query.all()
+    for post in posts:
+        add_to_index('post', post)
+    
+    db.session.commit()
+    click.echo(f'Reindexed {len(posts)} posts.')

@@ -10,10 +10,8 @@ from flask_babel import Babel, lazy_gettext as _l
 from config import Config
 from opensearchpy import OpenSearch
 
-
 def get_locale():
     return request.accept_languages.best_match(current_app.config['LANGUAGES'])
-
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -22,7 +20,6 @@ login.login_view = 'auth.login'
 login.login_message = _l('Please log in to access this page.')
 moment = Moment()
 babel = Babel()
-
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -57,11 +54,23 @@ def create_app(config_class=Config):
     from app.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
 
-    if not app.debug and not app.testing:
+    # One-time reindex on startup (REMOVE AFTER FIRST SUCCESSFUL DEPLOY)
+    if not app.debug and not app.testing and app.elasticsearch:
+        with app.app_context():
+            try:
+                from app.models import Post
+                from app.search import add_to_index
+                posts = Post.query.all()
+                for post in posts:
+                    add_to_index('post', post)
+                db.session.commit()
+                app.logger.info(f'Reindexed {len(posts)} posts')
+            except Exception as e:
+                app.logger.error(f'Reindex failed: {e}')
 
+    if not app.debug and not app.testing:
         """
         FOR SMTP CONFIGURATION
-
         if app.config['MAIL_SERVER']:
             auth = None
             if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
@@ -77,9 +86,7 @@ def create_app(config_class=Config):
                 credentials=auth, secure=secure)
             mail_handler.setLevel(logging.ERROR)
             app.logger.addHandler(mail_handler)
-
         """
-
         if not os.path.exists('logs'):
             os.mkdir('logs')
         file_handler = RotatingFileHandler('logs/microblog.log',
@@ -94,6 +101,5 @@ def create_app(config_class=Config):
         app.logger.info('Microblog startup')
 
     return app
-
 
 from app import models
