@@ -16,6 +16,7 @@ certifi==2025.10.5
     # via
     #   elastic-transport
     #   requests
+    #   sib-api-v3-sdk
 charset-normalizer==3.4.4
     # via requests
 click==8.1.8
@@ -95,7 +96,9 @@ psycopg2-binary==2.9.10
 pyjwt==2.9.0
     # via -r requirements.in
 python-dateutil==2.9.0.post0
-    # via elasticsearch
+    # via
+    #   elasticsearch
+    #   sib-api-v3-sdk
 python-dotenv==1.0.1
     # via -r requirements.in
 pytz==2025.2
@@ -104,10 +107,13 @@ pytz==2025.2
     #   flask-babel
 requests==2.32.4
     # via -r requirements.in
+sib-api-v3-sdk==7.6.0
+    # via -r requirements.in
 six==1.17.0
     # via
     #   langdetect
     #   python-dateutil
+    #   sib-api-v3-sdk
 sqlalchemy==2.0.44
     # via
     #   alembic
@@ -121,6 +127,7 @@ urllib3==2.2.3
     # via
     #   elastic-transport
     #   requests
+    #   sib-api-v3-sdk
 werkzeug==3.0.6
     # via
     #   flask
