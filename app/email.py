@@ -11,10 +11,10 @@ configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
 api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 
 
-def send_async_email(subject, sender, recipients, html_body):
-    try:
-        with current_app.app_context():
-            current_app.logger.info(f"send_async_email started for {recipients}")
+def send_async_email(app, subject, sender, recipients, html_body):
+    with app.app_context():
+        try:
+            app.logger.info(f"send_async_email started for {recipients}")
             send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
                 to=[{"email": email} for email in recipients],
                 sender={"email": sender},
@@ -22,13 +22,15 @@ def send_async_email(subject, sender, recipients, html_body):
                 html_content=html_body
             )
             api_instance.send_transac_email(send_smtp_email)
-            current_app.logger.info(f"Email sent successfully to {recipients}")
-    except Exception as e:
-        current_app.logger.error(f"Email send failed: {e}")
-        current_app.logger.error(traceback.format_exc())
+            app.logger.info(f"Email sent successfully to {recipients}")
+        except Exception as e:
+            app.logger.error(f"Email send failed: {e}")
+            app.logger.error(traceback.format_exc())
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
-    current_app.logger.info(f"send_email called for {recipients}")
+    from flask import current_app
+    app = current_app._get_current_object()  # get the actual app instance
+    app.logger.info(f"send_email called for {recipients}")
     Thread(target=send_async_email,
-           args=(subject, sender, recipients, html_body)).start()
+           args=(app, subject, sender, recipients, html_body)).start()
