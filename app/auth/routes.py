@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, current_app
 from urllib.parse import urlsplit
 from flask_login import login_user, logout_user, current_user
 from flask_babel import _
@@ -62,6 +62,7 @@ def reset_password_request():
             sa.select(User).where(User.email == form.email.data))
         if user:
             send_password_reset_email(user)
+            current_app.logger.info(f"Triggered password reset for {user.email}")         
         flash(
             _('Check your email for the instructions to reset your password'))
         return redirect(url_for('auth.login'))
