@@ -1,17 +1,30 @@
 from threading import Thread
-from flask import current_app
-from flask_mail import Message
-from app import mail
+import os
+from flask import app
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
+
+# Configure Brevo API client
+configuration = sib_api_v3_sdk.Configuration()
+configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
+api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 
 
-def send_async_email(app, msg):
+def send_async_email(subject, sender, recipients, html_body):
     with app.app_context():
-        mail.send(msg)
+        send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+            to=[{"email": email} for email in recipients],
+            sender={"email": sender},
+            subject=subject,
+            html_content=html_body
+        )
+        try:
+            api_instance.send_transac_email(send_smtp_email)
+        except ApiException as e:
+            app.logger.error(f"Brevo API error: {e}")
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
-    msg = Message(subject, sender=sender, recipients=recipients)
-    msg.body = text_body
-    msg.html = html_body
+    # Brevo only supports HTML content in transactional emails
     Thread(target=send_async_email,
-           args=(current_app._get_current_object(), msg)).start()
+           args=(subject, sender, recipients, html_body)).start()
