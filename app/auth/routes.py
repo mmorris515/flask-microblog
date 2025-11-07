@@ -9,6 +9,8 @@ from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User
 from app.auth.email import send_password_reset_email
+from app.auth.email import send_email
+
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -84,3 +86,14 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
+
+@bp.route('/test_email')
+def test_email():
+    send_email(
+        subject="Test Email",
+        sender="noreply@mmorris.dev",
+        recipients=["mmorris515@gmail.com"],
+        text_body="This is a test",
+        html_body="<p>This is a test email from Brevo.</p>"
+    )
+    return "Email triggered"
